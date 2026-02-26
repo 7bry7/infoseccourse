@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 $conn = new mysqli("localhost", "root", "", "lab_activity");
 $action = $_POST['action'] ?? '';
 
+// --- LOGIN BLOCK ---
 if ($action == 'login') {
     $user = $_POST['username'];
     $pass = $_POST['password'];
@@ -36,21 +37,22 @@ if ($action == 'login') {
             echo json_encode(['status' => 'error', 'message' => 'Mail Error: ' . $mail->ErrorInfo]);
         }
     } else {
-        
         echo json_encode(['status' => 'error', 'message' => 'Invalid Username or Password!']);
     }
-    if ($action == 'verify'){
-        $input_otp = $_POST['otp'];
-        $user = $_SESSION['temp_user'];
+} // <--- This curly brace closes the Login block correctly
 
-        $result = $conn -> query("SELECT * FROM users WHERE username='$user' AND otp='$input_otp'");
+// --- VERIFY BLOCK (Must be outside the Login block) ---
+if ($action == 'verify') {
+    $input_otp = $_POST['otp'];
+    $user = $_SESSION['temp_user'];
 
-        if ($result -> num_rows > 0) {
-            $_SESSION['authenticated'] = $user;
-            echo json_encode(['status' => 'success']);
-        } else {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid OTP!']);
-        }
-        
-        }
+    $result = $conn->query("SELECT * FROM users WHERE username='$user' AND otp='$input_otp'");
+
+    if ($result->num_rows > 0) {
+        $_SESSION['authenticated'] = $user;
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Invalid OTP!']);
+    }
 }
+?>
