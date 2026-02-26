@@ -17,7 +17,6 @@ if ($action == 'login') {
         $conn->query("UPDATE users SET otp='$otp' WHERE username='$user'");
         $_SESSION['temp_user'] = $user;
 
-        
         $mail = new PHPMailer();
         $mail->isSMTP();
         $mail->Host = 'sandbox.smtp.mailtrap.io'; 
@@ -40,4 +39,18 @@ if ($action == 'login') {
         
         echo json_encode(['status' => 'error', 'message' => 'Invalid Username or Password!']);
     }
+    if ($action == 'verify'){
+        $input_otp = $_POST['otp'];
+        $user = $_SESSION['temp_user'];
+
+        $result = $conn -> query("SELECT * FROM users WHERE username='$user' AND otp='$input_otp'");
+
+        if ($result -> num_rows > 0) {
+            $_SESSION['authenticated'] = $user;
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Invalid OTP!']);
+        }
+        
+        }
 }

@@ -44,7 +44,6 @@
         const data = await response.json();
 
         if (data.status === 'success') {
-            alert("OTP Generated: " + data.otp); // You see the OTP here
             document.getElementById('otp_input').disabled = false;
             document.getElementById('validateBtn').disabled = false;
             errorMsg.innerText = "";
