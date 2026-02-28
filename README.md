@@ -1,1 +1,1 @@
-# infoseccourse
+# This system is about logging in a hard-coded credentials and asking a one-time pin (OTP) which is sent by mailtrap with the help of PHPMailer library. If the credentials and OTP matches in the database, lands in homepage. If not, displays an error.
