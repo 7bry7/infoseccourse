@@ -3,15 +3,57 @@
 <head>
     <title>Lab Activity 02</title>
     <style>
-        body { background: #121212; color: white; font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; }
-        .card { border: 1px solid #444; padding: 20px; width: 300px; text-align: center; border-radius: 10px; }
-        input { width: 90%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #555; color: white; }
-        input:disabled { background: #111; color: #666; cursor: not-allowed; }
-        button { width: 97%; padding: 10px; background: #28a745; border: none; color: white; cursor: pointer; margin-top: 10px; }
-        button:disabled { background: #1e5a2d; cursor: not-allowed; }
-        #feedback-msg { font-size: 0.85em; margin-top: 10px; min-height: 1.2em; }
-        .msg-success { color: #5fd27a; }
-        .msg-error { color: #ff4444; }
+        body { 
+            background: #121212; 
+            color: white; 
+            font-family: sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px; 
+        }
+        .card { 
+            border: 1px solid #444; 
+            padding: 20px; width: 300px; 
+            text-align: center; 
+            border-radius: 10px; 
+        }
+        input { 
+            width: 90%; 
+            padding: 10px; 
+            margin: 10px 0; 
+            background: #222; 
+            border: 1px solid #555; 
+            color: white; 
+        }
+        input:disabled { 
+            background: #111; 
+            color: #666; 
+            cursor: not-allowed;
+        }
+        button { 
+            width: 97%; 
+            padding: 10px; 
+            background: #28a745; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+        button:disabled { 
+            background: #1e5a2d; 
+            cursor: not-allowed; 
+        }
+        #feedback-msg { 
+            font-size: 0.85em; 
+            margin-top: 10px; 
+            min-height: 1.2em; 
+        }
+        .msg-success { 
+            color: #5fd27a; 
+        }
+        .msg-error { 
+            color: #ff4444; 
+        }
     </style>
 </head>
 <body>

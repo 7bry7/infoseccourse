@@ -29,8 +29,12 @@ if (!isset($_SESSION['authenticated'])) {
             text-align: center; 
             width: 400px;
         }
-        h1 { color: #28a745; margin-bottom: 10px; }
-        h3 { color: #bbb; margin-bottom: 30px; }
+        h1 { 
+            color: #28a745; margin-bottom: 10px; 
+        }
+        h3 { 
+            color: #bbb; margin-bottom: 30px; 
+        }
         .logout-btn { 
             text-decoration: none; 
             color: #ff4444; 
@@ -38,7 +42,9 @@ if (!isset($_SESSION['authenticated'])) {
             padding: 10px 20px; 
             border-radius: 5px; 
         }
-        .logout-btn:hover { background: #ff4444; color: white; }
+        .logout-btn:hover { 
+            background: #ff4444; color: white; 
+        }
     </style>
 </head>
 <body>
