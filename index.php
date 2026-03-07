@@ -9,7 +9,9 @@
         input:disabled { background: #111; color: #666; cursor: not-allowed; }
         button { width: 97%; padding: 10px; background: #28a745; border: none; color: white; cursor: pointer; margin-top: 10px; }
         button:disabled { background: #1e5a2d; cursor: not-allowed; }
-        #error-msg { color: #ff4444; font-size: 0.8em; margin-top: 10px; }
+        #feedback-msg { font-size: 0.85em; margin-top: 10px; min-height: 1.2em; }
+        .msg-success { color: #5fd27a; }
+        .msg-error { color: #ff4444; }
     </style>
 </head>
 <body>
@@ -25,14 +27,14 @@
     <input type="text" id="otp_input" placeholder="ENTER OTP" disabled>
     <button id="validateBtn" onclick="processOTP()" disabled>VALIDATE</button>
 
-    <p id="error-msg"></p>
+    <p id="feedback-msg" class="msg-error"></p>
 </div>
 
 <script>
     async function processLogin() {
         const user = document.getElementById('username').value;
         const pass = document.getElementById('password').value;
-        const errorMsg = document.getElementById('error-msg');
+        const feedbackMsg = document.getElementById('feedback-msg');
 
         // Send data to PHP without reloading
         const response = await fetch('backend.php', {
@@ -46,9 +48,11 @@
         if (data.status === 'success') {
             document.getElementById('otp_input').disabled = false;
             document.getElementById('validateBtn').disabled = false;
-            errorMsg.innerText = "";
+            feedbackMsg.className = 'msg-success';
+            feedbackMsg.innerText = data.message || 'OTP sent to your email.';
         } else {
-            errorMsg.innerText = data.message;
+            feedbackMsg.className = 'msg-error';
+            feedbackMsg.innerText = data.message || 'Login failed. Please try again.';
         }
     }
 
@@ -66,7 +70,9 @@
         if (data.status === 'success') {
             window.location.href = 'home.php'; // Redirect on success
         } else {
-            document.getElementById('error-msg').innerText = data.message;
+            const feedbackMsg = document.getElementById('feedback-msg');
+            feedbackMsg.className = 'msg-error';
+            feedbackMsg.innerText = data.message || 'Invalid OTP!';
         }
     }
 </script>

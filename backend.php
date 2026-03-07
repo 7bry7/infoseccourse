@@ -34,7 +34,11 @@ if ($action == 'login') {
         if($mail->send()) {
             echo json_encode(['status' => 'success', 'message' => 'OTP sent to email.']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Mail Error: ' . $mail->ErrorInfo]);
+            error_log('PHPMailer send failed: ' . $mail->ErrorInfo);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'We could not send your OTP right now. Please try again in a moment.'
+            ]);
         }
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Invalid Username or Password!']);
