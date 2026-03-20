@@ -61,7 +61,7 @@ if ($action == 'login') {
 
 // --- VERIFY BLOCK
 if ($action == 'verify') {
-    $input_otp = $_POST['otp'];
+    $input_otp = preg_replace('/\D/', '', (string)($_POST['otp'] ?? ''));
     $user = $_SESSION['temp_user'] ?? '';
 
     if (empty($user)) {
@@ -85,6 +85,11 @@ if ($action == 'verify') {
     $secret = $row['google_auth_secret'];
 
     $g = new PHPGangsta_GoogleAuthenticator();
+
+    if (strlen($input_otp) !== 6) {
+        echo json_encode(['status' => 'error', 'message' => 'OTP must be 6 digits.']);
+        exit;
+    }
 
     if($g->verifyCode($secret, $input_otp, 2)){
         $_SESSION['authenticated'] = $user;
